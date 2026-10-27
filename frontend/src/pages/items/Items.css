@@ -1,0 +1,51 @@
+.item-card {
+  transition: transform 0.15s, box-shadow 0.15s;
+}
+
+.item-card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.1);
+}
+
+.item-card-img {
+  width: 100%;
+  aspect-ratio: 4 / 3;
+  object-fit: contain;
+  background-color: #fff;
+}
+
+.item-card .card-title a {
+  color: inherit;
+  text-decoration: none;
+}
+
+.item-detail-img {
+  width: 100%;
+  aspect-ratio: 4 / 3;
+  object-fit: contain;
+  border-radius: 0.5rem;
+  background-color: #fff;
+}
+
+.item-form-preview {
+  width: 100%;
+  max-width: 320px;
+  aspect-ratio: 4 / 3;
+  object-fit: contain;
+  border-radius: 0.5rem;
+  background-color: #fff;
+}
+
+.item-detail-table th {
+  white-space: nowrap;
+  width: 40%;
+}
+
+@media (max-width: 575.98px) {
+  .item-card .card-footer .btn {
+    flex: 1;
+  }
+  .item-card .card-footer .ms-auto {
+    margin-left: 0 !important;
+  }
+}

@@ -1,0 +1,30 @@
+.navbar .nav-link {
+    color: rgba(255, 255, 255, 0.85) !important;
+    text-decoration: none !important;
+}
+
+.navbar .nav-link.active,
+.navbar .nav-link:hover {
+    color: #fff !important;
+}
+
+.navbar .nav-link.active {
+    font-weight: 600;
+}
+
+@media (min-width: 992px) {
+    .navbar .nav-link {
+        margin-right: 12px;
+    }
+}
+
+/* Mobile: give the collapsed menu some breathing room */
+@media (max-width: 991.98px) {
+    .navbar-collapse {
+        padding: 0.5rem 0 0.75rem;
+    }
+    .navbar .dropdown-menu {
+        max-height: 60vh;
+        overflow-y: auto;
+    }
+}
