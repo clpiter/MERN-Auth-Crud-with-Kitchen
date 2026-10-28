@@ -11,9 +11,17 @@ const seedItems = require("./src/scripts/seedItems");
 const app = express();
 const PORT = process.env.PORT || 5000;
 
-// Comma separated list of allowed frontend URLs, e.g. https://my-app.vercel.app
+// Deployed frontend, always allowed. Vercel gives every deployment its own URL
+// (mern-auth-crud-with-kitchen-8zi5-<hash>-piter-computer-works.vercel.app), so match them all.
+const frontendOrigins = [
+    "https://mern-auth-crud-with-kitchen-8zi5-2xt66vdi7-piter-computer-works.vercel.app",
+    /^https:\/\/mern-auth-crud-with-kitchen-8zi5(-[a-z0-9]+)*-piter-computer-works\.vercel\.app$/
+];
+
+// Comma separated list of extra allowed frontend URLs, e.g. http://localhost:5173.
+// Leave CORS_ORIGIN empty to allow every origin.
 const allowedOrigins = process.env.CORS_ORIGIN
-    ? process.env.CORS_ORIGIN.split(",").map((origin)=>origin.trim().replace(/\/$/,""))
+    ? [...frontendOrigins, ...process.env.CORS_ORIGIN.split(",").map((origin)=>origin.trim().replace(/\/$/,""))]
     : true;
 
 app.use(cors({origin:allowedOrigins}));
