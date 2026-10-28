@@ -1,6 +1,10 @@
 // Set VITE_API_URL in .env (local) or in Vercel project settings (production)
 export const API_URL = (import.meta.env.VITE_API_URL || "http://localhost:5000").replace(/\/$/, "");
 
+if (import.meta.env.PROD && !import.meta.env.VITE_API_URL) {
+  console.error("VITE_API_URL was not set when this site was built, so API calls go to http://localhost:5000. Set it in Vercel and redeploy.");
+}
+
 // Reads the user from a JWT payload (id, name, email, role, sid, exp).
 // Returns null if the token is malformed. An expired access token still identifies
 // the user; the session is renewed with the refresh token on the next request.
@@ -28,11 +32,17 @@ export async function apiRequest(path, { method = "GET", body, token } = {}) {
     headers.Authorization = `Bearer ${token}`;
   }
 
-  const response = await fetch(`${API_URL}${path}`, {
-    method,
-    headers,
-    body: body ? JSON.stringify(body) : undefined
-  });
+  let response;
+  try {
+    response = await fetch(`${API_URL}${path}`, {
+      method,
+      headers,
+      body: body ? JSON.stringify(body) : undefined
+    });
+  } catch {
+    // Server down, wrong VITE_API_URL, or blocked by CORS: the browser gives no details
+    throw new Error(`Can't reach the server (${API_URL}). Please try again later.`);
+  }
   const result = await response.json().catch(() => ({}));
 
   if (!response.ok) {

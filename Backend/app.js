@@ -11,11 +11,11 @@ const seedItems = require("./src/scripts/seedItems");
 const app = express();
 const PORT = process.env.PORT || 5000;
 
-// Deployed frontend, always allowed. Vercel gives every deployment its own URL
-// (mern-auth-crud-with-kitchen-8zi5-<hash>-piter-computer-works.vercel.app), so match them all.
+// Deployed frontend, always allowed: the production domain plus the URL Vercel gives
+// every single deployment (mern-auth-crud-with-kitchen-8zi5-<hash>-piter-computer-works.vercel.app)
 const frontendOrigins = [
-    "https://mern-auth-crud-with-kitchen-8zi5-2xt66vdi7-piter-computer-works.vercel.app",
-    /^https:\/\/mern-auth-crud-with-kitchen-8zi5(-[a-z0-9]+)*-piter-computer-works\.vercel\.app$/
+    "https://mern-auth-crud-with-kitchen-8zi5.vercel.app",
+    /^https:\/\/mern-auth-crud-with-kitchen-8zi5-[a-z0-9]{9}-piter-computer-works\.vercel\.app$/
 ];
 
 // Comma separated list of extra allowed frontend URLs, e.g. http://localhost:5173.
